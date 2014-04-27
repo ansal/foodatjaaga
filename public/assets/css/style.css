@@ -1,0 +1,48 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+body {
+    width: 100%;
+    height: 100%;
+    margin-top: 1%;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #fff;
+    background-color: #000;
+    background: url(/assets/img/bg/10.JPG) no-repeat top center scroll;
+}
+
+h1.title {
+  margin-top: 5%;
+  color: white;
+  opacity: 1;
+  font-family: 'Ruluko', sans-serif;
+  font-size: 5em;
+  background: rgba(0, 0, 0, .4);
+}
+h4.subtitle {
+  font-family: 'Ruluko', sans-serif;
+  color: white;
+  background: rgba(0, 0, 0, .4);
+  line-height: 1.8em;
+}
+h4.modalTitle {
+  color: black;
+}
+label {
+  color: black;
+}
+p {
+  color: black;
+}
+.row .footer {
+  margin-top: 10%;
+}
+.footer-text {
+  background: rgba(0, 0, 0, .4);
+  color: white;
+}
+.footer-text > a {
+  color: white;
+  text-decoration: underline;
+}
