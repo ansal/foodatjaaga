@@ -20,8 +20,10 @@ var menuSchema = new Schema({
 });
 
 var voteSchema = new Schema({
-  menu: ObjectId,
-  user: ObjectId,
+  _food: { type: ObjectId, ref: 'Food' },
+  _menu: { type: ObjectId, ref: 'Menu' },
+  _user: { type: ObjectId, ref: 'Vote' },
+  rating: Boolean,
   date: Number,
   month: Number,
   year: Number,

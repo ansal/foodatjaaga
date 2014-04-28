@@ -81,6 +81,7 @@ app.get('/', routes.index);
 // APIs
 app.post('/api/food', apis.CreateFood);
 app.post('/api/menu', apis.CreateMenu);
+app.post('/api/vote', apis.CreateVote);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

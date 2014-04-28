@@ -103,16 +103,49 @@
           Nobody has voted yet :(
         </div>
         {{ } else { }}
-        {{ for(var i = 0; i < votes.length; i++) { }}
-          {{= votes[i] }}
-          {{ }
-        } }}
+          <div class="col-md-3">
+            <div id="breakfastChartContainer"></div>
+          </div>
+          <div class="col-md-3">
+            <div id="lunchChartContainer"></div>
+          </div>
+          <div class="col-md-3">
+            <div id="snacksChartContainer"></div>
+          </div>
+          <div class="col-md-3">
+            <div id="dinnerChartContainer"></div>
+          </div>
+        {{ } }}
       </div>
     </div>
   </div> <!-- container-fluid -->
 
   <script src="/assets/js/jquery.min.js"></script>
   <script src="/assets/js/bootstrap.min.js"></script>
+  <script src="/assets/js/canvasjs.min.js"></script>
+  <script src="/assets/js/app.js"></script>
 
+  <!-- Chart Data -->
+  <script>
+    window.FoodChart = {};
+    $(document).ready(function(){    
+      createPieChart('breakfastChartContainer', 'Breakfast', [
+          {  y: 60, legendText:"Good", label: "60%" },
+          {  y: 40, legendText:"Bad", label: "40%" },
+        ]);
+      createPieChart('lunchChartContainer', 'Lunch', [
+          {  y: 60, legendText:"Good", label: "60%" },
+          {  y: 40, legendText:"Bad", label: "40%" },
+        ]);
+      createPieChart('snacksChartContainer', 'Snacks', [
+          {  y: 60, legendText:"Good", label: "60%" },
+          {  y: 40, legendText:"Bad", label: "40%" },
+        ]);
+      createPieChart('dinnerChartContainer', 'Dinner', [
+          {  y: 60, legendText:"Good", label: "60%" },
+          {  y: 40, legendText:"Bad", label: "40%" },
+        ]);
+    });
+  </script>
 </body>
 </html>
