@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Food @ Jaaga</title>
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <style>
+    body {
+      margin-top: 70px;
+    }
+  </style>
+</head>
+
+<body>
+
+  {{ include menus }}
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>How's Food?</h2>
+        <hr>
+        <div class="col-md-3">
+          {{ if (breakfasts.length === 0) { }}
+          <div class="alert alert-danger">
+            Breakfast not yet ready :(
+          </div>
+          {{ } else { }}
+          <div class="alert alert-info">
+            Breakfast
+          </div>
+          {{ for(var i = 0; i < breakfasts.length; i++) { }}
+            <h4>{{= breakfasts[i]._food.title }}</h4>
+            <img src="{{= breakfasts[i]._food.imgUrl }}" alt="" class="img-responsive img-rounded" style="width:100%;">
+            <a href="#" class="btn btn-success voteupButton" data-food="{{=breakfasts[i]._food._id}}" data-menu="{{=breakfasts[i]._id}}"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+            <a href="#" class="btn btn-danger votedownButton" data-food="{{=breakfasts[i]._food._id}}" data-menu="{{=breakfasts[i]._id}}"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+            <hr>
+          {{ } 
+          } }}
+        </div> <!-- col-md-3 -->
+        <div class="col-md-3">
+          {{ if (lunchs.length === 0) { }}
+          <div class="alert alert-danger">
+            Lunch not yet ready :(
+          </div>
+          {{ } else { }}
+          <div class="alert alert-info">
+            Lunch
+          </div>
+          {{ for(var i = 0; i < lunchs.length; i++) { }}
+            <h4>{{= lunchs[i]._food.title }}</h4>
+            <img src="{{= lunchs[i]._food.imgUrl }}" alt="" class="img-responsive img-rounded" style="width:100%;">
+            <a href="#" class="btn btn-success voteupButton" data-food="{{=lunchs[i]._food._id}}" data-menu="{{=lunchs[i]._id}}"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+            <a href="#" class="btn btn-danger votedownButton" data-food="{{=lunchs[i]._food._id}}" data-menu="{{=lunchs[i]._id}}"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+            <hr>
+          {{ } 
+          } }}
+        </div> <!-- col-md-3 -->
+        <div class="col-md-3">
+          {{ if (snacks.length === 0) { }}
+          <div class="alert alert-danger">
+            Snacks not yet ready :(
+          </div>
+          {{ } else { }}
+          <div class="alert alert-info">
+            Snacks
+          </div>
+          {{ for(var i = 0; i < snacks.length; i++) { }}
+            <h4>{{= snacks[i]._food.title }}</h4>
+            <img src="{{= snacks[i]._food.imgUrl }}" alt="" class="img-responsive img-rounded" style="width:100%;">
+            <a href="#" class="btn btn-success voteupButton" data-food="{{=snacks[i]._food._id}}" data-menu="{{=snacks[i]._id}}"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+            <a href="#" class="btn btn-danger votedownButton" data-food="{{=snacks[i]._food._id}}" data-menu="{{=snacks[i]._id}}"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+            <hr>
+          {{ } 
+          } }}
+        </div> <!-- col-md-3 -->
+        <div class="col-md-3">
+          {{ if (dinners.length === 0) { }}
+          <div class="alert alert-danger">
+            Dinner not yet ready :(
+          </div>
+          {{ } else { }}
+          <div class="alert alert-info">
+            Dinner
+          </div>
+          {{ for(var i = 0; i < dinners.length; i++) { }}
+            <h4>{{= dinners[i]._food.title }}</h4>
+            <img src="{{= dinners[i]._food.imgUrl }}" alt="" class="img-responsive img-rounded" style="width:100%;">
+            <a href="#" class="btn btn-success voteupButton" data-food="{{=dinners[i]._food._id}}" data-menu="{{=dinners[i]._id}}"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+            <a href="#" class="btn btn-danger votedownButton" data-food="{{=dinners[i]._food._id}}" data-menu="{{=dinners[i]._id}}"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+            <hr>
+          {{ } 
+          } }}
+        </div> <!-- col-md-3 -->
+      </div> <!-- col-md-12 -->
+    </div> <!-- row -->
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Vote Statistics</h2>
+        <hr>
+        {{ if(votes.length === 0) { }}
+        <div class="alert alert-danger">
+          Nobody has voted yet :(
+        </div>
+        {{ } else { }}
+        {{ for(var i = 0; i < votes.length; i++) { }}
+          {{= votes[i] }}
+          {{ }
+        } }}
+      </div>
+    </div>
+  </div> <!-- container-fluid -->
+
+  <script src="/assets/js/jquery.min.js"></script>
+  <script src="/assets/js/bootstrap.min.js"></script>
+
+</body>
+</html>
