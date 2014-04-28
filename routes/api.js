@@ -89,9 +89,11 @@ exports.CreateVote = function(req, res) {
       res.json(votingFinishedError);
       return;
     }
+    console.log(menu._id, req.user._id)
     // Validate vote whether he has voted one or mote
     Vote.find({
       _menu: menu._id,
+      _user: req.user._id,
       date: today.getDate(),
       month: today.getMonth(),
       year: today.getFullYear()
@@ -100,6 +102,7 @@ exports.CreateVote = function(req, res) {
 
   function validateVote(err, existingVotes) {
     if(err) throw err;
+    console.log(existingVotes.length);
     if(existingVotes.length !== 0) {
       res.json(alreadyVotedError);
       return;
@@ -107,6 +110,7 @@ exports.CreateVote = function(req, res) {
     var vote = new Vote({
       _food: _food,
       _menu: _menu,
+      _user: req.user._id,
       rating: rating,
       date: today.getDate(),
       month: today.getMonth(),
@@ -122,10 +126,6 @@ exports.CreateVote = function(req, res) {
 
   if(!req.user) {
     res.json(authenticationError);
-    return;
-  }
-  if(Config.admins.indexOf(req.user.email) === -1) {
-    res.json(adminError);
     return;
   }
 

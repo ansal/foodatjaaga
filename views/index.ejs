@@ -95,8 +95,14 @@
       </div> <!-- col-md-12 -->
     </div> <!-- row -->
     <div class="row">
-      <div class="col-md-12">
-        <h2>Vote Statistics</h2>
+      <div class="col-md-12" id="statistics">
+        <h2>
+          Vote Statistics
+          <br>
+          <small>
+            <a href="#" class="btn btn-xs btn-default" id="gotoStatistics">Refresh</a>
+          </small>
+        </h2>
         <hr>
         {{ if(votes.length === 0) { }}
         <div class="alert alert-danger">
@@ -104,16 +110,36 @@
         </div>
         {{ } else { }}
           <div class="col-md-3">
-            <div id="breakfastChartContainer"></div>
+            <div id="breakfastChartContainer">
+              <h4>Breakfast</h4>
+              <div class="alert alert-danger">
+                Not enough votes to generate chart!
+              </div>
+            </div>
           </div>
           <div class="col-md-3">
-            <div id="lunchChartContainer"></div>
+            <div id="lunchChartContainer">
+              <h4>Lunch</h4>
+              <div class="alert alert-danger">
+                Not enough votes to generate chart!
+              </div>
+            </div>
           </div>
           <div class="col-md-3">
-            <div id="snacksChartContainer"></div>
+            <div id="snacksChartContainer">
+              <h4>Snacks</h4>
+              <div class="alert alert-danger">
+                Not enough votes to generate chart!
+              </div>
+            </div>
           </div>
           <div class="col-md-3">
-            <div id="dinnerChartContainer"></div>
+            <div id="dinnerChartContainer">
+              <h4>Dinner</h4>
+              <div class="alert alert-danger">
+                Not enough votes to generate chart!
+              </div>
+            </div>
           </div>
         {{ } }}
       </div>
@@ -127,25 +153,33 @@
 
   <!-- Chart Data -->
   <script>
-    window.FoodChart = {};
-    $(document).ready(function(){    
-      createPieChart('breakfastChartContainer', 'Breakfast', [
-          {  y: 60, legendText:"Good", label: "60%" },
-          {  y: 40, legendText:"Bad", label: "40%" },
-        ]);
-      createPieChart('lunchChartContainer', 'Lunch', [
-          {  y: 60, legendText:"Good", label: "60%" },
-          {  y: 40, legendText:"Bad", label: "40%" },
-        ]);
-      createPieChart('snacksChartContainer', 'Snacks', [
-          {  y: 60, legendText:"Good", label: "60%" },
-          {  y: 40, legendText:"Bad", label: "40%" },
-        ]);
-      createPieChart('dinnerChartContainer', 'Dinner', [
-          {  y: 60, legendText:"Good", label: "60%" },
-          {  y: 40, legendText:"Bad", label: "40%" },
-        ]);
-    });
+    // data generated for graph
+    window.FoodData = {};
+    window.FoodData.breakfasts = [];
+    window.FoodData.breakfasts = [
+      {{ for(var i = 0; i < breakfasts.length; i++) { }} '{{= breakfasts[i]._id }}', {{ } }}
+    ];
+    window.FoodData.lunchs = [];
+    window.FoodData.lunchs = [
+      {{ for(var i = 0; i < lunchs.length; i++) { }} '{{= lunchs[i]._id }}', {{ } }}
+    ];
+    window.FoodData.snacks = [];
+    window.FoodData.snacks = [
+      {{ for(var i = 0; i < snacks.length; i++) { }} '{{= snacks[i]._id }}', {{ } }}
+    ];
+    window.FoodData.dinners = [];
+    window.FoodData.dinners = [
+      {{ for(var i = 0; i < dinners.length; i++) { }} '{{= dinners[i]._id }}', {{ } }}
+    ];
+    window.FoodData.votes = [];
+    window.FoodData.votes = [
+      {{ for(var i = 0; i < votes.length; i++) { }} {
+        _id: '{{= votes[i]._id }}',
+        _food: '{{= votes[i]._food }}',
+        _menu: '{{= votes[i]._menu }}',
+        rating: {{= votes[i].rating }}
+      }, {{ } }}
+    ];
   </script>
 </body>
 </html>
