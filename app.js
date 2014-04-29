@@ -76,7 +76,10 @@ app.get('/auth/callback/google',
   failureRedirect: '?loginError=true' })
 );
 
+// Pages
 app.get('/', routes.index);
+app.get('/food', routes.Food);
+app.get('/logout', routes.logout);
 
 // APIs
 app.post('/api/food', apis.CreateFood);

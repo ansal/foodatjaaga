@@ -9,8 +9,6 @@ var Vote = FoodModel.Vote;
 
 exports.index = function(req, res){
 
-  var response = {};
-
   function findBreakfasts(err, breakfasts) {
     if(err) throw err;
     response.breakfasts = breakfasts;
@@ -68,12 +66,13 @@ exports.index = function(req, res){
   }
 
   if(!req.user) {
-    res.redirect('/auth/login/google');
+    res.render('login');
     return;
   }
 
   var response = {};
   response.user = req.user;
+  response.admins = Config.admins;
   var today = new Date();
 
   Menu.find({
@@ -84,4 +83,29 @@ exports.index = function(req, res){
   })
   .populate('_food')
   .exec(findBreakfasts);
+};
+
+exports.Food = function(req, res) {
+  if(!req.user) {
+    res.redirect('/');
+    return;
+  }
+  if(Config.admins.indexOf(req.user.email) === -1) {
+    res.redirect('/logout');
+    return;
+  }
+  var response = {
+    user: req.user,
+    admins: Config.admins
+  };
+  Food.find({}, function(err, foods){
+    if(err) throw err;
+    response.foods = foods;
+    res.render('food', response);
+  });
+}
+
+exports.logout = function(req, res) {
+  req.logout();
+  res.redirect('/');
 };

@@ -75,7 +75,6 @@ $(document).ready(function(){
   $('#gotoStatistics').on('click', function(e){
     e.preventDefault();
     reloadAndGotoAnchor();
-
   });
   
 });

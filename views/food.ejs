@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Food @ Jaaga</title>
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <style>
+    body {
+      margin-top: 70px;
+    }
+  </style>
+</head>
+
+<body>
+
+  {{ include menus }}
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Add Food</h3>
+        <div class="alert alert-danger" id="addFoodError" style="display:none">
+          <strong>Error: </strong> Please enter both fields!
+        </div>
+        <div class="col-md-4">
+          <input type="text" class="form-control" placeholder="Enter title of food" id="foodTitle">
+        </div>
+        <div class="col-md-4">
+          <input type="text" class="form-control" placeholder="URL for image. No image uploading yet, sorry ;)" id="imgUrl">
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-success" id="addFoodButton">Add</button>
+        </div>
+        <hr>
+      </div> <!-- col-md-12 -->
+    </div> <!-- row -->
+    <div class="row">
+      <div class="col-md-12">
+        {{ for(var i = 0; i < foods.length; i++) { }}
+        <div class="col-md-3">
+          <img src="{{= foods[i].imgUrl }}" alt="" class="img-responsive">
+          <h4>{{= foods[i].title }}</h4>
+        </div>
+        {{ } }}
+      </div>
+    </div> <!-- row -->
+  </div> <!-- container-fluid -->
+
+  <script src="/assets/js/jquery.min.js"></script>
+  <script src="/assets/js/bootstrap.min.js"></script>
+  <script src="/assets/js/food.js"></script>
+
+</body>
+</html>
