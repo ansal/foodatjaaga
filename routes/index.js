@@ -105,6 +105,82 @@ exports.Food = function(req, res) {
   });
 }
 
+exports.Menu = function(req, res) {
+  function findFoods(err, foods){
+    if(err) throw err;
+    response.foods = foods;
+    Menu.find({
+      date: today.getDate(),
+      month: today.getMonth(),
+      year: today.getFullYear(),
+      when: 'breakfast'
+    })
+    .populate('_food')
+    .exec(findBreakfasts);
+  }
+
+  function findBreakfasts(err, breakfasts) {
+    if(err) throw err;
+    response.breakfasts = breakfasts;
+    Menu.find({
+      date: today.getDate(),
+      month: today.getMonth(),
+      year: today.getFullYear(),
+      when: 'lunch'
+    })
+    .populate('_food')
+    .exec(findLunch);    
+  }
+
+  function findLunch(err, lunchs) {
+    if(err) throw err;
+    response.lunchs = lunchs;
+    Menu.find({
+      date: today.getDate(),
+      month: today.getMonth(),
+      year: today.getFullYear(),
+      when: 'snacks'
+    })
+    .populate('_food')
+    .exec(findSnacks);    
+  }
+
+  function findSnacks(err, snacks) {
+    if(err) throw err;
+    response.snacks = snacks;
+    Menu.find({
+      date: today.getDate(),
+      month: today.getMonth(),
+      year: today.getFullYear(),
+      when: 'dinner'
+    })
+    .populate('_food')
+    .exec(findDinner);    
+  }
+
+  function findDinner(err, dinners) {
+    if(err) throw err;
+    response.dinners = dinners;
+    res.render('menu', response);
+  }
+
+  if(!req.user) {
+    res.redirect('/');
+    return;
+  }
+  if(Config.admins.indexOf(req.user.email) === -1) {
+    res.redirect('/logout');
+    return;
+  }
+  var response = {
+    user: req.user,
+    admins: Config.admins
+  };
+  var today = new Date();
+
+  Food.find({}, findFoods);
+}
+
 exports.logout = function(req, res) {
   req.logout();
   res.redirect('/');

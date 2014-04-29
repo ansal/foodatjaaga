@@ -79,6 +79,7 @@ app.get('/auth/callback/google',
 // Pages
 app.get('/', routes.index);
 app.get('/food', routes.Food);
+app.get('/menu', routes.Menu);
 app.get('/logout', routes.logout);
 
 // APIs
